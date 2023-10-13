@@ -35,7 +35,7 @@
                 
                 />
                 </div>
-            <el-button type="warning" plain :icon="Upload" style="margin-top:20px">Generate</el-button>
+            <el-button type="warning" plain :icon="Upload" style="margin-top:20px" @click="generateImage">Generate</el-button>
             </div>
            
         </el-col>
@@ -108,6 +108,10 @@ const getSongLyrics=async()=>{
     } catch (error) {
         console.error(error);
     }
+}
+
+const generateImage=()=>{
+    router.push('/fourthPage')
 }
 
 
