@@ -46,6 +46,8 @@
 import { useRouter } from 'vue-router'
 import { onMounted,ref} from 'vue';
 import { Upload } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
+import OpenAI from "openai"
 
 
 const router = useRouter();
@@ -58,10 +60,14 @@ const albumTitle  =ref('')
 const releaseDate = ref('')
 const albumImage  =ref('')
 const singerImage  =ref('')
+const resultPrompts=ref('')
+const resultUid=ref('')
+const resultUrl=ref('')
 
 const fullLyrics=ref()
 
 const getSongDetail=async()=>{
+   
     const axios = require('axios');
 
     const options = {
@@ -110,8 +116,122 @@ const getSongLyrics=async()=>{
     }
 }
 
-const generateImage=()=>{
-    router.push('/fourthPage')
+const generateImage=async()=>{
+    ElMessage({
+    message: 'Please be patient,your image is being painted...',
+    type: 'success',
+  })
+    
+    const axios = require('axios');
+    //获取prompt
+    const openai = new OpenAI({
+  apiKey: "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",
+  dangerouslyAllowBrowser:true
+});
+
+    const response = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    messages: [
+        {
+        "role": "user",
+        "content": selectedLyrics.value
+        }
+    ],
+    temperature: 1,
+    max_tokens: 256,
+    top_p: 1,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+    });
+
+    try {
+        console.log(response.choices[0].message.content);
+        resultPrompts.value=response.choices[0].message.content
+    } catch (error) {
+        console.error(error);
+    }
+
+    let resultpromptsValue = resultPrompts.value || '';
+    resultpromptsValue+='11.masterpiece'
+    resultPrompts.value=resultpromptsValue
+    console.log(resultPrompts.value)
+
+    //获取uid
+const requestInfo = {
+  method: "POST",
+  url: "https://23329.o.apispace.com/aigc/txt2img",
+  headers: {
+    "X-APISpace-Token": "8qdtf7fect98p1dzkkath5hw5ju5ow1e",
+    "Authorization-Type": "apikey",
+    "Content-Type": "application/json",
+  },
+  data: {
+    task: "txt2img.sd",
+    params: {
+      model: "anime",
+      text:resultPrompts.value,
+      w: 750,
+      h: 512,
+      guidance_scale: 14,
+      negative_prompt: "cropped, blurred, mutated, error, lowres, blurry, low quality, username, signature, watermark, text, nsfw, missing limb, fused hand, missing hand, extra limbs, malformed limbs, bad hands, extra fingers, fused fingers, missing fingers, bad breasts, deformed, mutilated, morbid, bad anatomy",
+      sampler: "k_euler",
+      seed: 1072366942,
+      num_steps: 25,
+    },
+    model: "anime",
+    text:
+      resultPrompts.value,
+      w: 750,
+      h: 512,
+      guidance_scale: 14,
+      negative_prompt: "cropped, blurred, mutated, error, lowres, blurry, low quality, username, signature, watermark, text, nsfw, missing limb, fused hand, missing hand, extra limbs, malformed limbs, bad hands, extra fingers, fused fingers, missing fingers, bad breasts, deformed, mutilated, morbid, bad anatomy",
+      sampler: "k_euler",
+      seed: 1072366942,
+      num_steps: 25,
+      notify_url: "",
+    },
+  }
+
+  try {
+        const response2 = await axios.request(requestInfo);
+        console.log(response2)
+        console.log(response2.data.data.uid);
+        const resultuid=response2.data.data.uid
+        resultUid.value=resultuid
+    } catch (error) {
+        console.error(error);
+    }
+    
+
+    //延迟5秒获取url
+    setTimeout(async()=>{
+        const requestInfo2 = {
+        method: "POST",
+        url: "https://23329.o.apispace.com/aigc/query-image",
+        headers: {
+            "X-APISpace-Token": "8qdtf7fect98p1dzkkath5hw5ju5ow1e",
+            "Authorization-Type": "apikey",
+            "Content-Type": "application/json",
+        },
+        data: {
+            uid: resultUid.value,
+        },
+        };
+        try {
+            const response3 = await axios.request(requestInfo2);
+            console.log(response3)
+            console.log(response3.data.data.cdn);
+            const resulturl=response3.data.data.cdn
+            resultUrl.value=resulturl
+        } catch (error) {
+            console.error(error);
+        }
+
+        router.push({ path: '/fourthPage', query: { resultUrl: resultUrl.value }})
+    },8000)
+    
+    
+
 }
 
 

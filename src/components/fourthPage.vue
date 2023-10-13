@@ -1,12 +1,9 @@
 <template>
    <div class="split-div">
     <el-card :body-style="{ padding: '0px' }" class="piccard">
-        <img
-          src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-          class="image"
-        />
+        <img :src="resultUrl" class="final-image"/>
         <div style="padding: 14px">
-          <span>Yummy hamburger</span>
+          <span style="margin-left:10px;float:left;font-size: 24px;font-weight: bold;color:rgba(6, 36, 146, 0.75)">Prompts:</span>
           <div class="bottom">
           
           </div>
@@ -19,7 +16,7 @@
 <style>
 .split-div{
     position: relative;
-    height: 100vh;
+    height: 95vh;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -45,7 +42,29 @@
     height:85vh;
     width:70vw;
     margin-left:15vw;
-    margin-top:7vh
+    margin-top:5vh
+}
+
+.final-image{
+    height:70vh;
+    width:70vw;
 }
 
 </style>
+
+<script setup>
+import { useRouter } from 'vue-router'
+import { onMounted,ref} from 'vue';
+
+
+const router = useRouter();
+
+
+const resultUrl=ref('')
+onMounted(() => {
+  // 从路由的 query 参数中获取
+  resultUrl.value = router.currentRoute.value.query.resultUrl;
+
+  
+});
+</script>
