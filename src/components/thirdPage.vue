@@ -1,23 +1,27 @@
 <template>
-    <el-row style="margin-bottom:20px;">
+    <el-row style="background-color: aliceblue;height:50vh">
         <el-col :span="8">
-            <img class="headerimagesong" :src="albumImage" style="margin-top:60px;margin-bottom:10px;height:250px;width:250px;box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.3);border-radius: 15px;">
+            <el-image class="headerimagesong" :src="albumImage" style="margin-top:60px;margin-bottom:10px;height:250px;width:250px;box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.3);border-radius: 15px;">
+                <template #placeholder>
+                        <div class="image-slot">Loading<span class="dot">...</span></div>
+                        </template>
+            </el-image>
 
         </el-col>
         <el-col :span="16" >
-            <div >
-                <p style="color:rgba(12, 38, 121, 0.863);font-size: 56px;font-weight:bolder ;margin-top:60px;margin-left:-800px;margin-bottom: -5px;">{{songTitle}}</p>
-                <div style="display: flex;text-align: center;justify-content: center;margin-left:-800px;align-items: center;">
+            <div style="text-align: left;margin-left: -50px;">
+                <p style="color:rgba(12, 38, 121, 0.863);font-size: 56px;font-weight:bolder ;margin-top:60px;margin-bottom: -5px;">{{songTitle}}</p>
+                <div style="display: flex;align-items: center;margin-top: 10px;">
                     <el-avatar :src="singerImage" :size="40" />
                     <p style="color:rgba(17, 63, 138, 0.755);font-size: 18px;font-weight:bold;margin-left:14px">{{artistName}}</p>
                 </div>
 
-                <p style="color:rgb(109, 109, 109);font-size: 16px;font-weight:lighter ;margin-left:-800px;">{{albumTitle}}·<span>{{ releaseDate }}</span></p>
+                <p style="color:rgb(109, 109, 109);font-size: 16px;font-weight:lighter ;margin-top:10px">{{albumTitle}}·<span>{{ releaseDate }}</span></p>
             </div>
            
         </el-col>
     </el-row>
-    <el-divider />
+    <el-divider style="margin-top:0px"/>
     <el-row style="margin-bottom: 100px;">
         <el-col :span="10">
             <p style="font-size: 26px;font-weight: bold;color: rgba(72, 72, 72, 0.881);">Lyrics</p>
@@ -46,7 +50,7 @@
 import { useRouter } from 'vue-router'
 import { onMounted,ref} from 'vue';
 import { Upload } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
+import { ElMessage,ElLoading } from 'element-plus'
 import OpenAI from "openai"
 
 
@@ -63,6 +67,8 @@ const singerImage  =ref('')
 const resultPrompts=ref('')
 const resultUid=ref('')
 const resultUrl=ref('')
+const printedResultPrompts=ref('')
+const finalQueryString=ref('')
 
 const fullLyrics=ref()
 
@@ -125,9 +131,11 @@ const generateImage=async()=>{
     const axios = require('axios');
     //获取prompt
     const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: "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",
   dangerouslyAllowBrowser:true
 });
+   
+    selectedLyrics.value = "I will give you some sentences, and you just give me 10 key words for all sentences in total.Don't give me anything else,just 10 key words." + selectedLyrics.value;
 
     const response = await openai.chat.completions.create({
     model: "gpt-3.5-turbo",
@@ -155,7 +163,8 @@ const generateImage=async()=>{
     resultpromptsValue+='11.masterpiece'
     resultPrompts.value=resultpromptsValue
     console.log(resultPrompts.value)
-
+    printedResultPrompts.value=resultPrompts.value.replace('11.masterpiece', '');
+    console.log(printedResultPrompts.value)
     //获取uid
 const requestInfo = {
   method: "POST",
@@ -201,9 +210,18 @@ const requestInfo = {
     } catch (error) {
         console.error(error);
     }
+
+    const loading = ElLoading.service({
+        lock: true,
+        text: 'Painting',
+        background: 'rgba(255, 255, 255, 0.5)',
+    })
+    setTimeout(() => {
+        loading.close()
+    }, 10000)
     
 
-    //延迟5秒获取url
+    //延迟10秒获取url
     setTimeout(async()=>{
         const requestInfo2 = {
         method: "POST",
@@ -227,8 +245,11 @@ const requestInfo = {
             console.error(error);
         }
 
-        router.push({ path: '/fourthPage', query: { resultUrl: resultUrl.value }})
-    },8000)
+        finalQueryString.value=resultUrl.value+'+'+printedResultPrompts.value
+
+
+        router.push({ path: '/fourthPage', query: { finalQueryString: finalQueryString.value }})
+    },10000)
     
     
 
@@ -249,7 +270,7 @@ onMounted(() => {
 </script>
 
 
-<style>
+<style scoped>
 .a{
     text-decoration: none;
 }
@@ -258,7 +279,7 @@ onMounted(() => {
     font-size: 14px;
     font-family: PingFangSC, PingFangSC-Medium;
     font-weight: 300;
-    color: #000;
+    color: #5e5e5e;
     ::v-deep * {
       line-height: 16.5px;
       margin-bottom: 20px;
@@ -266,12 +287,16 @@ onMounted(() => {
    ::v-deep p {
       text-indent: 2em;
     }
+    ::v-deep a {
+        text-decoration: none !important;
+        color: #515151 !important;
+        }
 
 }
 
 .full-lyrics ::v-deep a {
   text-decoration: none !important;
-  color: #000 !important;
+  color: #737373 !important;
 }
 
 .headerimagesong{

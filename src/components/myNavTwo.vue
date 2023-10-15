@@ -22,7 +22,10 @@
       <el-menu-item index="Lines">Lines</el-menu-item>
       <el-menu-item index="About">About</el-menu-item>
       <el-drawer v-model="drawerOn" title="About" :direction="direction" :before-close="handleClose">
-          <div style="display:flex;justify-content:center;align-items: center;flex-direction: column;">   
+          <div style="display:flex;flex-direction: column;text-align:left;"> 
+            <p><span style="font-size:17px;font-weight: bold;color:#2d4aa3">author:</span>Charotte Yang</p>
+            <p><span style="font-size:17px;font-weight: bold;color:#2d4aa3">github:</span>https://github.com/llRagdoll/image_generatorr</p>
+            <p><span style="font-size:17px;font-weight: bold;color:#2d4aa3">e-mail:</span>charlottyanggg@qq.com  </p>
           </div>
       </el-drawer>
       <el-menu-item index="Avatar" >
@@ -45,18 +48,17 @@ const drawerOn=ref(false)
 
 const handleSelect = (index) => {
   const currentRoute = router.currentRoute.value;
-  
-      store.dispatch('updateChoice', index);
-      console.log(store.getters.getChoice);
-      if(index==='About'){
-        drawerOn.value=true
-      }
+    store.dispatch('updateChoice', index);
+    console.log(store.getters.getChoice);
+    if(index==='About'){
+      drawerOn.value=true
+    }
 
-      if (currentRoute.path !== '/') {
-        router.push('/');
-      }
+    if (currentRoute.path !== '/') {
+      router.push('/');
+    }
 
-    };
+  };
 
 // export default{
 //   activeIndex,

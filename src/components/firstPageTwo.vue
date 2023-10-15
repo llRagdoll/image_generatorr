@@ -1,7 +1,7 @@
 <template>
     <div style="align-items: center;text-align: center;justify-content: center;">
     <el-image :src="imgpath" class="my-image"/> 
-        <div style="width:350px;display:flex;align-items: center;text-align: center;justify-content: center;margin-left: 35vw;">
+        <div style="width:350px;display:flex;align-items: center;text-align: center;justify-content: center;margin-left: 35vw;margin-top:-20vh">
             <el-input
             v-model="input"
             class="my-input"
@@ -11,19 +11,38 @@
             :width="20"
             style="border-radius: 20px;"
             />
-            <el-button circle class="my-button-round" :icon="Check" @click="searchLyrics" ></el-button>
+            <el-button class="my-button-round" :icon="Check" @click="searchLyrics" type="warning"/>
         </div>
     </div>
-    <div style="height:700px">
+    <div style="height:650px;margin-top:20vh">
         <el-row>
-            <el-col :span="10">
+            <el-col class="leftcol" :span="10">
                 <div class="introduction">
-                    <p style="font-size:30px;font-weight: bold;color:rgb(63, 63, 63)">Introduction</p>
+                    <p style="font-size:42px;font-weight: bold;color:rgb(48, 83, 162);margin-top:50px;margin-bottom:0px">Introduction</p>
+                    <p style="margin-top:10px;">
+                        Have you ever imagined those <span style="font-weight: bold;color:rgb(80, 109, 195)">
+                            soul-stirring lyrics and lines
+                        </span> being presented in a unique and artistic way? 
+                     </p>  
+                     <p>
+                        Here, notes don't just stay on the sheet music, and lines don't merely linger on the screen; 
+                        they 
+                        <span style="font-weight: bold;color:rgb(80, 109, 195)">
+                            dance within images
+                        </span>, narrating stories as if speaking from behind the scenes. 
+                     </p>   
+                      
+                    
+                    <p>Unleash your
+                        <span style="font-weight: bold;color:rgb(80, 109, 195)">
+                             boundless creativity
+                        </span> for music and dialogue, transforming them into visual poetry.
+                    </p> 
                 </div>
             </el-col>
-            <el-col :span="14">
+            <el-col  class="rightcol" :span="14">
                 <div style="margin-top:40px">
-                    <span style="font-size: 30px;font-weight: bold;margin-top: 100px;">Recommended</span>
+                    <!-- <span style="font-size: 30px;font-weight: bold;margin-top: 100px;">Recommended</span> -->
                 </div>
                 
                 <el-row :gutter="20" style="margin-top:60px">
@@ -64,7 +83,7 @@
                             </div>
                             </template>
                             <div style="margin-top: 10px;">
-                                <el-row v-for="(item, index) in listLyrics" :key="index" style="margin-top:15px">
+                                <el-row v-for="(item, index) in listLines" :key="index" style="margin-top:15px">
                                     <el-col :span="2">
                                         <span style="font-size: 14px;color: rgb(6, 91, 170);">{{ index + 1 }}</span>
                                     </el-col>
@@ -84,11 +103,29 @@
         </el-row>
         
     </div>
+    <div class="bigone">
+        <div class="left">
+            <img src="example2.png" class="example-img" style="width:450px;height:300px;justify-content: center;border-radius: 5px;box-shadow: 2px 2px 2px 2px rgba(180, 180, 180, 0.241);">
+        </div>
+        <div class="right">
+            <div style="display:block;margin-left:50px">
+                <p style="font-size:58px;color:rgb(37, 82, 149);font-weight: bolder;margin-bottom:20px"> 
+                AIGC
+                </p>
+                <p style="width:350px;font-size: 17px">
+                    Embark on a journey to explore the formidable power of AI, where you'll witness its unparalleled strength in action,
+                     reshaping the boundaries of what's possible and unlocking new realms of innovation and discovery.
+                </p>
+                <el-button link style="font-size:20px;color:rgb(37, 82, 149);font-weight: bold; " @click="scrollToTop">Get Started!</el-button>
+            </div>
+            
+        </div>
+    </div>
    
 </template>
 
 <script setup>
-import { ref,watch } from 'vue';
+import { onMounted, ref,watch } from 'vue';
 import { Search, Check,Headset,Film } from '@element-plus/icons-vue';
  import { useRouter } from 'vue-router'
 import { useStore } from 'vuex';
@@ -111,7 +148,21 @@ const listLyrics= [
         { title: 'Love Story', artist: 'Taylor Swift' },
       ]
 
+const listLines= [
+{ title: 'Game of Thr', artist: 'tvSeries' },
+{ title: 'Friends', artist: 'tvSeries' },
+{ title: 'TBBT', artist: 'tvSeries' },
+{ title: 'Avengers', artist: 'movie' },
+{ title: 'Stranger Things', artist: 'tvSeries' },
+{ title: 'Downton Abbey', artist: 'tvSeires' },
+{ title: '2 Broke Girls', artist: 'tvSeries' },
+{ title: 'Titanic', artist: 'movie' },
+{ title: 'Flipped', artist: 'movie' },
+{ title: 'Love Actually', artist: 'movie' },
+]
+
 watch(() => store.getters.getChoice, (newChoice) => {
+    console.log(imgpath.value)
     if(newChoice!='About'){
         imgpath.value = newChoice === 'Lyrics' ? imgpaths[0] : imgpaths[1];
     }
@@ -128,6 +179,15 @@ else{
 
 };
 
+onMounted(() => {
+    imgpath.value = store.getters.getChoice === 'Lyrics' ? imgpaths[0] : imgpaths[1];
+});
+
+
+function scrollToTop() {
+        document.documentElement.scrollTop = 0;
+    }
+
 </script>
 
 <style>
@@ -139,26 +199,28 @@ else{
 }
 
 .my-input{
-    margin-top:-380px;
+   
     width:300px;
     text-align: center;
     align-items: center;
     justify-content: center;
 }
 .my-button-round{
-    margin-top:-380px;
+    
     margin-left:30px;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-
-    background-color: white;
 }
 
 .introduction{
     text-align: center;
     align-items: center;
     justify-content: center;
+    padding:60px;
+    font-size:17px
+}
+
+.introduction p{
+    letter-spacing: 0.8px;
+    line-height: 1.6;
 }
 
 .firstcard:hover{
@@ -167,5 +229,43 @@ else{
 .firstcard{
     width:25vw;
     margin-left: 0px;
+}
+
+.bigone{
+    height:95vh;
+    width:100vw;
+    display:flex;
+}
+.left{
+    height:95vh;
+    width:50vw;
+    background-color: rgba(222, 240, 255, 0.514);
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display:flex
+}
+
+
+.right{
+    height:95vh;
+    width:50vw;
+    background-color:rgba(240, 248, 255, 0.605);
+    text-align: left;
+    align-items: center;
+    /* justify-content: center;  */
+    display:flex
+}
+
+/* .leftcol{
+    background-color: rgba(222, 240, 255, 0.671);
+}
+
+.rightcol{
+    background-color: aliceblue;
+} */
+
+.example-img:hover{
+    transform: scale(1.02); 
 }
 </style>

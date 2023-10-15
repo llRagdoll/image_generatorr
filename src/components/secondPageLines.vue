@@ -7,7 +7,11 @@
         <el-row style="margin-bottom:40px;margin-top: 50px;">
             <el-col :span="8" class="cardcol">
                 <el-card class="moviecard">
-                  <img :src="topThreeImage_1" style="width: 300px;height:300px"> 
+                    <el-image :src="topThreeImage_1" style="width: 300px;height:300px"> 
+                        <template #placeholder>
+                        <div class="image-slot">Loading<span class="dot">...</span></div>
+                        </template>
+                    </el-image>
                     <p style="font-size: 22px;font-weight: bolder;">{{ topThreeMovies_1 }}</p>
                     <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);">{{ topThreeType_1 }}
                         <span>·{{ topThreeYear_1 }}</span>
@@ -17,7 +21,11 @@
             </el-col>
             <el-col :span="8" class="cardcol">
                 <el-card class="moviecard">
-                    <img :src="topThreeImage_2" style="width: 300px;height:300px"> 
+                    <el-image :src="topThreeImage_2" style="width: 300px;height:300px"> 
+                        <template #placeholder>
+                        <div class="image-slot">Loading<span class="dot">...</span></div>
+                        </template>
+                    </el-image>
                     <p style="font-size: 22px;font-weight: bolder;">{{ topThreeMovies_2 }}</p>
                     <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);">{{ topThreeType_2 }}
                         <span>·{{ topThreeYear_2 }}</span>
@@ -27,7 +35,11 @@
             </el-col>
             <el-col :span="8" class="cardcol">
                 <el-card class="moviecard">
-                    <img :src="topThreeImage_3" style="width: 300px;height:300px"> 
+                    <el-image :src="topThreeImage_3" style="width: 300px;height:300px"> 
+                        <template #placeholder>
+                        <div class="image-slot">Loading<span class="dot">...</span></div>
+                        </template>
+                    </el-image>
                     <p style="font-size: 22px;font-weight: bolder;">{{ topThreeMovies_3 }}</p>
                     <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);">{{ topThreeType_3 }}
                         <span>·{{ topThreeYear_3 }}</span>
