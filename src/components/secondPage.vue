@@ -2,44 +2,44 @@
     <div>
        
         <div style="align-items: center;justify-content: center;text-align: center;">
-            <p style="font-size: 48px;font-weight: bolder;color: rgb(15, 62, 144);">Lyrics</p>
+            <p style="font-size: 48px;font-weight: bolder;color: rgb(15, 62, 144);">Music</p>
             <p style="margin-top:-20px;color: rgba(15, 62, 144, 0.706);">Get what you like of any given track right now</p>
         </div>
         <el-row style="margin-bottom:40px;margin-top: 50px;">
             <el-col :span="8" class="cardcol">
                 <el-card class="songcard">
-                    <el-image :src="topThreeImage_1" style="width: 300px;height:300px"> 
+                    <el-image :src="topThreeImage_1" style="width: 300px;height:300px;margin-top:20px"> 
                         <template #placeholder>
                         <div class="image-slot">Loading<span class="dot">...</span></div>
                         </template>
                     </el-image>
-                    <p style="font-size: 22px;font-weight: bolder;">{{ topThreeSongs_1 }}</p>
-                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);">{{ topThreeSinger_1 }}</p>
-                    <el-button text bg @click="getLyrics(1)" type="primary" style="margin-top: 15px;">Get lyrics&nbsp;-></el-button>
+                    <p style="font-size: 22px;font-weight: bolder;height:70px">{{ topThreeSongs_1 }}</p>
+                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);height:50px">{{ topThreeSinger_1 }}</p>
+                    <el-button text bg @click="getLyrics(1)" type="primary" style="margin-top:0px">Get lyrics&nbsp;-></el-button>
                 </el-card>
             </el-col>
             <el-col :span="8" class="cardcol">
                 <el-card class="songcard">
-                    <el-image :src="topThreeImage_2" style="width: 300px;height:300px"> 
+                    <el-image :src="topThreeImage_2" style="width: 300px;height:300px;margin-top: 20px;"> 
                         <template #placeholder>
                         <div class="image-slot">Loading<span class="dot">...</span></div>
                         </template>
                     </el-image>
-                    <p style="font-size: 22px;font-weight: bolder;">{{ topThreeSongs_2 }}</p>
-                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);">{{ topThreeSinger_2 }}</p>
-                    <el-button text bg @click="getLyrics(2)" type="primary" style="margin-top: 15px;">Get lyrics&nbsp;-></el-button>
+                    <p style="font-size: 22px;font-weight: bolder;height:70px">{{ topThreeSongs_2 }}</p>
+                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);height:50px">{{ topThreeSinger_2 }}</p>
+                    <el-button text bg @click="getLyrics(2)" type="primary" style="margin-top:0px">Get lyrics&nbsp;-></el-button>
                 </el-card>
             </el-col>
             <el-col :span="8" class="cardcol">
                 <el-card class="songcard">
-                    <el-image :src="topThreeImage_3" style="width: 300px;height:300px"> 
+                    <el-image :src="topThreeImage_3" style="width: 300px;height:300px;margin-top: 20px;"> 
                         <template #placeholder>
                         <div class="image-slot">Loading<span class="dot">...</span></div>
                         </template>
                     </el-image>
-                    <p style="font-size: 22px;font-weight: bolder;">{{ topThreeSongs_3 }}</p>
-                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);">{{ topThreeSinger_3 }}</p>
-                    <el-button text bg @click="getLyrics(3)" type="primary" style="margin-top: 15px;">Get lyrics&nbsp;-></el-button>
+                    <p style="font-size: 22px;font-weight: bolder;height:70px">{{ topThreeSongs_3 }}</p>
+                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);height:50px">{{ topThreeSinger_3 }}</p>
+                    <el-button text bg @click="getLyrics(3)" type="primary" style="margin-top:0px">Get lyrics&nbsp;-></el-button>
                 </el-card>
             </el-col>
         </el-row>
@@ -59,7 +59,7 @@
 }
 .songcard{
     width:400px;
-    height:500px;
+    height:600px;
     
 }
 </style>

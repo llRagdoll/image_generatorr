@@ -1,5 +1,5 @@
 <template>
-    <el-row style="background-color: aliceblue;height:50vh">
+    <el-row style="background-color: rgba(240, 248, 255, 0.791);height:50vh">
         <el-col :span="8">
             <el-image class="headerimg" :src="movieImage" style="margin-top:60px;margin-bottom:10px;height:300px;width:250px;box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.3);border-radius: 15px;">
                 <template #placeholder>
@@ -30,21 +30,25 @@
     <el-divider style="margin-top:0px"/>
     <el-row style="margin-bottom: 100px;">
         <el-col :span="10">
-            <p style="font-size: 26px;font-weight: bold;color: rgba(72, 72, 72, 0.881);">Lines</p>
+            <p style="font-size: 30px;font-weight: bold;color: rgba(92, 58, 156, 0.881);">Lines</p>
+            <div class="myquotes">
+
+       
             <template v-if="quotes.length > 0">
                 <p v-for="(quote, index) in quotes" :key="index" style="font-weihgt:800;">{{ quote }}</p>
             </template>
             <template v-else>
                 <p>None</p>
             </template>
+        </div>
         </el-col>
         <el-col :span="14" style="text-align: center;align-items: center;justify-content: center;">
             <div style="text-align: center;align-items: center;justify-content: center;">
-                <p style="font-size: 26px;font-weight: bold;color: rgba(72, 72, 72, 0.881);">Selected</p>
+                <p style="font-size: 30px;font-weight: bold;color: rgba(92, 58, 156, 0.881);">Selected</p>
                 <div style="width: 560px;text-align: center;align-items: center;justify-content: center;margin-left:140px">
                     <el-input
                     v-model="selectedLines"
-                    :rows="10"
+                    :rows="12"
                     type="textarea"
                     placeholder="Paste your wanted lines here!"        
                 />
@@ -306,4 +310,20 @@ onMounted(() => {
 .headerimage:hover{
     transform: scale(1.02); 
 }
+
+.myquotes{
+    font-size: 15px;
+    font-family: PingFangSC, PingFangSC-Medium;
+    font-weight: 300;
+    color: #5e5e5e;
+    border: 1px solid #c0bfbf90;
+    border-radius:10px;
+    margin-left:40px;
+    box-shadow: 2px 2px 3px 3px #d4d3d319;
+    padding:10px
+}
+.myquotes:hover{
+    transform: scale(1.005);
+}
+
 </style>

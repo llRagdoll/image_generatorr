@@ -1,5 +1,5 @@
 <template>
-    <el-row style="background-color: aliceblue;height:50vh">
+    <el-row style="background-color: rgba(240, 248, 255, 0.791);height:45vh">
         <el-col :span="8">
             <el-image class="headerimagesong" :src="albumImage" style="margin-top:60px;margin-bottom:10px;height:250px;width:250px;box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.3);border-radius: 15px;">
                 <template #placeholder>
@@ -9,14 +9,14 @@
 
         </el-col>
         <el-col :span="16" >
-            <div style="text-align: left;margin-left: -50px;">
-                <p style="color:rgba(12, 38, 121, 0.863);font-size: 56px;font-weight:bolder ;margin-top:60px;margin-bottom: -5px;">{{songTitle}}</p>
+            <div style="text-align: left;margin-left: -50px;margin-top:15vh">
+                <p style="color:rgba(12, 38, 121, 0.863);font-size: 54px;font-weight:bolder ;margin-top:60px;margin-bottom: -5px;">{{songTitle}}</p>
                 <div style="display: flex;align-items: center;margin-top: 10px;">
                     <el-avatar :src="singerImage" :size="40" />
                     <p style="color:rgba(17, 63, 138, 0.755);font-size: 18px;font-weight:bold;margin-left:14px">{{artistName}}</p>
                 </div>
 
-                <p style="color:rgb(109, 109, 109);font-size: 16px;font-weight:lighter ;margin-top:10px">{{albumTitle}}·<span>{{ releaseDate }}</span></p>
+                <p style="color:rgb(26, 26, 26);font-size: 16px;font-weight:lighter ;margin-top:10px">{{albumTitle}}·<span>{{ releaseDate }}</span></p>
             </div>
            
         </el-col>
@@ -24,16 +24,16 @@
     <el-divider style="margin-top:0px"/>
     <el-row style="margin-bottom: 100px;">
         <el-col :span="10">
-            <p style="font-size: 26px;font-weight: bold;color: rgba(72, 72, 72, 0.881);">Lyrics</p>
+            <p style="font-size: 30px;font-weight: bold;color: rgba(92, 58, 156, 0.881);">Lyrics</p>
             <div class="full-lyrics" v-html="fullLyrics"></div>>
         </el-col>
         <el-col :span="14" style="text-align: center;align-items: center;justify-content: center;">
             <div style="text-align: center;align-items: center;justify-content: center;">
-                <p style="font-size: 26px;font-weight: bold;color: rgba(72, 72, 72, 0.881);">Selected</p>
+                <p style="font-size: 30px;font-weight: bold;color: rgba(92, 58, 156, 0.881);">Selected</p>
                 <div style="width: 560px;text-align: center;align-items: center;justify-content: center;margin-left:140px">
                     <el-input
                     v-model="selectedLyrics"
-                    :rows="10"
+                    :rows="12"
                     type="textarea"
                     placeholder="Paste your wanted lyrics here!"
                 
@@ -280,24 +280,28 @@ onMounted(() => {
     font-family: PingFangSC, PingFangSC-Medium;
     font-weight: 300;
     color: #5e5e5e;
-    ::v-deep * {
-      line-height: 16.5px;
-      margin-bottom: 20px;
-    }
-   ::v-deep p {
-      text-indent: 2em;
-    }
-    ::v-deep a {
-        text-decoration: none !important;
-        color: #515151 !important;
-        }
-
+    border: 1px solid #c0bfbf90;
+    border-radius:10px;
+    margin-left:40px;
+    box-shadow: 2px 2px 3px 3px #d4d3d319;
+}
+.full-lyrics:hover{
+    transform: scale(1.005);
 }
 
-.full-lyrics ::v-deep a {
-  text-decoration: none !important;
-  color: #737373 !important;
+:deep(.full-lyrics) a{
+    text-decoration: none !important;
+    color: #737373 !important;
 }
+:deep(.full-lyrics) a{
+    text-indent: 2em;
+}
+
+:deep(.full-lyrics) *{
+    line-height: 16.5px;
+    margin-bottom: 20px;
+}
+
 
 .headerimagesong{
     transform: scale(1.02); 

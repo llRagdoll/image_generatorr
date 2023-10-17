@@ -1,23 +1,24 @@
 <template>
     <div style="align-items: center;text-align: center;justify-content: center;">
-    <el-image :src="imgpath" class="my-image"/> 
-        <div style="width:350px;display:flex;align-items: center;text-align: center;justify-content: center;margin-left: 35vw;margin-top:-20vh">
+        <el-image :src="imgpath" class="my-image"/> 
+        <div style="width:350px;margin-left: 36vw;margin-top:-20vh;z-index:0">
             <el-input
             v-model="input"
             class="my-input"
-            placeholder="Please Input"
+            :placeholder="myplaceholder"
             :prefix-icon="Search"
             :size="small"
             :width="20"
-            style="border-radius: 20px;"
+            style="border-radius: 20px;z-index=1"
             />
-            <el-button class="my-button-round" :icon="Check" @click="searchLyrics" type="warning"/>
+            <el-button :icon=Check @click="searchLyrics" style="z-index=3;margin-top:20px" type="warning">Search</el-button>
         </div>
     </div>
-    <div style="height:650px;margin-top:20vh">
+    <div style="height:650px;margin-top:15vh">
         <el-row>
             <el-col class="leftcol" :span="10">
                 <div class="introduction">
+    
                     <p style="font-size:42px;font-weight: bold;color:rgb(48, 83, 162);margin-top:50px;margin-bottom:0px">Introduction</p>
                     <p style="margin-top:10px;">
                         Have you ever imagined those <span style="font-weight: bold;color:rgb(80, 109, 195)">
@@ -51,15 +52,15 @@
                             <template #header>
                             <div class="card-header">
                                 <div style="display: flex;justify-content: center;align-items: center;">
-                                    <Headset style="width:14px;margin-right: 10px;color:rgba(7, 35, 135, 0.749)"/>
-                                    <span style="font-size: 18px;font-weight: bold;color:rgba(7, 35, 135, 0.749)">Lyrics</span>
+                                    <Headset style="width:20px;margin-right: 10px;color:rgba(92, 58, 156, 0.881)"/>
+                                    <span style="font-size: 22px;font-weight: bold;color:rgba(92, 58, 156, 0.881)">Music</span>
                                 </div>
                             </div>
                             </template>
                             <div style="margin-top: 10px;">
                                 <el-row v-for="(item, index) in listLyrics" :key="index" style="margin-top:15px">
                                     <el-col :span="2">
-                                        <span style="font-size: 14px;color: rgb(6, 91, 170);">{{ index + 1 }}</span>
+                                        <span style="font-size: 14px;color: rgb(80, 80, 80);">{{ index + 1 }}</span>
                                     </el-col>
                                     <el-col :span="11">
                                         <span style="font-weight: 500;">{{ item.title }}</span>
@@ -76,8 +77,8 @@
                             <template #header>
                             <div class="card-header">
                                 <div style="display: flex;justify-content: center;align-items: center;">
-                                    <Film style="width:14px;margin-right: 10px;color:rgba(7, 35, 135, 0.749)"/>
-                                    <span style="font-size: 18px;font-weight: bold;color: rgba(7, 35, 135, 0.749)">Lines</span>
+                                    <Film style="width:20px;margin-right: 10px;color:rgba(92, 58, 156, 0.881)"/>
+                                    <span style="font-size: 22px;font-weight: bold;color: rgba(92, 58, 156, 0.881)">Media</span>
                                 </div>
                                 
                             </div>
@@ -85,7 +86,7 @@
                             <div style="margin-top: 10px;">
                                 <el-row v-for="(item, index) in listLines" :key="index" style="margin-top:15px">
                                     <el-col :span="2">
-                                        <span style="font-size: 14px;color: rgb(6, 91, 170);">{{ index + 1 }}</span>
+                                        <span style="font-size: 14px;color: rgb(93, 93, 93);">{{ index + 1 }}</span>
                                     </el-col>
                                     <el-col :span="11">
                                         <span style="font-weight: 500;">{{ item.title }}</span>
@@ -105,10 +106,10 @@
     </div>
     <div class="bigone">
         <div class="left">
-            <img src="example2.png" class="example-img" style="width:450px;height:300px;justify-content: center;border-radius: 5px;box-shadow: 2px 2px 2px 2px rgba(180, 180, 180, 0.241);">
+            <img src="example2.png" class="example-img" style="width:450px;height:300px;justify-content: center;border-radius: 5px;box-shadow: 2px 2px 2px 2px rgba(180, 180, 180, 0.241);margin-left:10vw">
         </div>
         <div class="right">
-            <div style="display:block;margin-left:50px">
+            <div style="display:block;margin-left:50px;margin-top:-10%">
                 <p style="font-size:58px;color:rgb(37, 82, 149);font-weight: bolder;margin-bottom:20px"> 
                 AIGC
                 </p>
@@ -116,7 +117,7 @@
                     Embark on a journey to explore the formidable power of AI, where you'll witness its unparalleled strength in action,
                      reshaping the boundaries of what's possible and unlocking new realms of innovation and discovery.
                 </p>
-                <el-button link style="font-size:20px;color:rgb(37, 82, 149);font-weight: bold; " @click="scrollToTop">Get Started!</el-button>
+                <el-button link style="font-size:20px;color:rgba(92, 58, 156, 0.881);font-weight: bold;margin-top:20px " @click="scrollToTop">Get Started!</el-button>
             </div>
             
         </div>
@@ -126,7 +127,7 @@
 
 <script setup>
 import { onMounted, ref,watch } from 'vue';
-import { Search, Check,Headset,Film } from '@element-plus/icons-vue';
+import {Check,Search,Headset,Film } from '@element-plus/icons-vue';
  import { useRouter } from 'vue-router'
 import { useStore } from 'vuex';
 
@@ -135,6 +136,7 @@ const store=useStore()
 const imgpaths = ['music.jpg', 'movie5.jpg'];
 const input = ref('');
 const imgpath = ref(imgpaths[0]);
+const myplaceholder=ref('Please input a song/singer...')
 const listLyrics= [
         { title: 'See You Again', artist: 'Chalie Puth' },
         { title: 'Love In The Dark', artist: 'Adele' },
@@ -164,7 +166,8 @@ const listLines= [
 watch(() => store.getters.getChoice, (newChoice) => {
     console.log(imgpath.value)
     if(newChoice!='About'){
-        imgpath.value = newChoice === 'Lyrics' ? imgpaths[0] : imgpaths[1];
+        imgpath.value = newChoice === 'Music' ? imgpaths[0] : imgpaths[1];
+        myplaceholder.value= newChoice==='Music' ? 'Please input a song/singer...' : 'Please input a movie/series...';
     }
 });
 
@@ -180,7 +183,8 @@ else{
 };
 
 onMounted(() => {
-    imgpath.value = store.getters.getChoice === 'Lyrics' ? imgpaths[0] : imgpaths[1];
+    imgpath.value = store.getters.getChoice === 'Music' ? imgpaths[0] : imgpaths[1];
+    myplaceholder.value=store.getters.getChoice==='Music' ? 'Please input a song/singer...' : 'Please input a movie/tvShow...';
 });
 
 
@@ -196,6 +200,7 @@ function scrollToTop() {
     width:100vw;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .2);
     margin-top: 0px;
+    z-index:0
 }
 
 .my-input{

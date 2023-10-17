@@ -1,50 +1,50 @@
 <template>
     <div>
         <div style="align-items: center;justify-content: center;text-align: center;">
-            <p style="font-size: 48px;font-weight: bolder;color: rgb(15, 62, 144);">Lines</p>
+            <p style="font-size: 48px;font-weight: bolder;color: rgb(15, 62, 144);">Media</p>
             <p style="margin-top:-20px;color: rgba(15, 62, 144, 0.706);">Get what you like of any given title right now</p>
         </div>
         <el-row style="margin-bottom:40px;margin-top: 50px;">
             <el-col :span="8" class="cardcol">
                 <el-card class="moviecard">
-                    <el-image :src="topThreeImage_1" style="width: 300px;height:300px"> 
+                    <el-image :src="topThreeImage_1" style="width: 300px;height:300px;margin-top:20px"> 
                         <template #placeholder>
                         <div class="image-slot">Loading<span class="dot">...</span></div>
                         </template>
                     </el-image>
-                    <p style="font-size: 22px;font-weight: bolder;">{{ topThreeMovies_1 }}</p>
-                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);">{{ topThreeType_1 }}
+                    <p style="font-size: 22px;font-weight: bolder;height:50px">{{ topThreeMovies_1 }}</p>
+                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);height:20px">{{ topThreeType_1 }}
                         <span>·{{ topThreeYear_1 }}</span>
                     </p>
-                    <el-button text bg @click="getLines(1)" type="primary" style="margin-top: 15px;">Get lines&nbsp;-></el-button>
+                    <el-button text bg @click="getLines(1)" type="primary" style="margin-top: 35px;">Get lines&nbsp;-></el-button>
                 </el-card>
             </el-col>
             <el-col :span="8" class="cardcol">
                 <el-card class="moviecard">
-                    <el-image :src="topThreeImage_2" style="width: 300px;height:300px"> 
+                    <el-image :src="topThreeImage_2" style="width: 300px;height:300px;margin-top:20px"> 
                         <template #placeholder>
                         <div class="image-slot">Loading<span class="dot">...</span></div>
                         </template>
                     </el-image>
-                    <p style="font-size: 22px;font-weight: bolder;">{{ topThreeMovies_2 }}</p>
-                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);">{{ topThreeType_2 }}
+                    <p style="font-size: 22px;font-weight: bolder;;height:50px">{{ topThreeMovies_2 }}</p>
+                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);;height:20px">{{ topThreeType_2 }}
                         <span>·{{ topThreeYear_2 }}</span>
                     </p>
-                    <el-button text bg @click="getLines(2)" type="primary" style="margin-top: 15px;">Get lines&nbsp;-></el-button>
+                    <el-button text bg @click="getLines(2)" type="primary" style="margin-top: 35px;">Get lines&nbsp;-></el-button>
                 </el-card>
             </el-col>
             <el-col :span="8" class="cardcol">
                 <el-card class="moviecard">
-                    <el-image :src="topThreeImage_3" style="width: 300px;height:300px"> 
+                    <el-image :src="topThreeImage_3" style="width: 300px;height:300px;margin-top:20px"> 
                         <template #placeholder>
                         <div class="image-slot">Loading<span class="dot">...</span></div>
                         </template>
                     </el-image>
-                    <p style="font-size: 22px;font-weight: bolder;">{{ topThreeMovies_3 }}</p>
-                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);">{{ topThreeType_3 }}
+                    <p style="font-size: 22px;font-weight: bolder;;height:50px">{{ topThreeMovies_3 }}</p>
+                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);height:20px">{{ topThreeType_3 }}
                         <span>·{{ topThreeYear_3 }}</span>
                     </p>
-                    <el-button text bg @click="getLines(3)" type="primary" style="margin-top: 15px;">Get lines&nbsp;-></el-button>
+                    <el-button text bg @click="getLines(3)" type="primary" style="margin-top: 35px;">Get lines&nbsp;-></el-button>
                 </el-card>
             </el-col>
         </el-row>
@@ -64,7 +64,7 @@
 }
 .moviecard{
     width:400px;
-    height:500px;
+    height:600px;
     
 }
 </style>

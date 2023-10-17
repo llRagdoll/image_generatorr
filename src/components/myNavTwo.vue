@@ -11,15 +11,15 @@
       active-text-color="#0b2a87"
     >
       <el-menu-item index="0">
-        <div  style="text-align: center;justify-content: center;align-items: center;">
-          <img src="../../public/picture.svg" style="margin-bttom:20px;height: 44px;width:44px;text-align: center;justify-content: center;"> 
+        <div  style="display:flex;text-align: center;justify-content: center;align-items: center;">
+          <img src="../../public/picture.svg" style="margin-bottom:10px;height: 54px;width:54px;text-align: center;justify-content: center;"> 
           <span style="margin-left:20px;color: #0b2a87;font-weight: bold;font-size: 24px;">Image Generator</span>
           <span style="margin-left:40px;color:#001b6bbe;font-size: 16px;">Picture how you feel</span>
         </div>
       </el-menu-item>
       <div class="flex-grow" />
-      <el-menu-item index="Lyrics">Lyrics</el-menu-item>
-      <el-menu-item index="Lines">Lines</el-menu-item>
+      <el-menu-item index="Music">Music</el-menu-item>
+      <el-menu-item index="Lines">Media</el-menu-item>
       <el-menu-item index="About">About</el-menu-item>
       <el-drawer v-model="drawerOn" title="About" :direction="direction" :before-close="handleClose">
           <div style="display:flex;flex-direction: column;text-align:left;"> 
