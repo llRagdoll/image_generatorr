@@ -4,50 +4,20 @@
             <p style="font-size: 48px;font-weight: bolder;color: rgb(15, 62, 144);">Media</p>
             <p style="margin-top:-20px;color: rgba(15, 62, 144, 0.706);">Get what you like of any given title right now</p>
         </div>
-        <el-row style="margin-bottom:40px;margin-top: 50px;">
-            <el-col :span="8" class="cardcol">
+        <el-row style="margin-bottom: 40px; margin-top: 50px;">
+            <el-col :span="8" class="cardcol" v-for="(movie, index) in ThreeMovieArray" :key="index">
                 <el-card class="moviecard">
-                    <el-image :src="topThreeImage_1" style="width: 300px;height:300px;margin-top:20px"> 
-                        <template #placeholder>
-                        <div class="image-slot">Loading<span class="dot">...</span></div>
-                        </template>
-                    </el-image>
-                    <p style="font-size: 22px;font-weight: bolder;height:50px">{{ topThreeMovies_1 }}</p>
-                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);height:20px">{{ topThreeType_1 }}
-                        <span>·{{ topThreeYear_1 }}</span>
-                    </p>
-                    <el-button text bg @click="getLines(1)" type="primary" style="margin-top: 35px;">Get lines&nbsp;-></el-button>
+                <el-image :src="ThreeImageArray[index]" style="width: 300px; height: 300px; margin-top: 20px">
+                    <template #placeholder>
+                    <div class="image-slot">Loading<span class="dot">...</span></div>
+                    </template>
+                </el-image>
+                <p style="font-size: 22px; font-weight: bolder; height: 50px">{{ ThreeMovieArray[index] }}</p>
+                <p style="font-size: 15px; font-weight: 300; color: rgb(103, 103, 103); height: 20px">{{ ThreeTypeArray[index] }}<span>·{{ ThreeYearArray[index] }}</span></p>
+                <el-button text bg @click="getLines(index + 1)" type="primary" style="margin-top: 35px;">Get lines&nbsp;-></el-button>
                 </el-card>
             </el-col>
-            <el-col :span="8" class="cardcol">
-                <el-card class="moviecard">
-                    <el-image :src="topThreeImage_2" style="width: 300px;height:300px;margin-top:20px"> 
-                        <template #placeholder>
-                        <div class="image-slot">Loading<span class="dot">...</span></div>
-                        </template>
-                    </el-image>
-                    <p style="font-size: 22px;font-weight: bolder;;height:50px">{{ topThreeMovies_2 }}</p>
-                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);;height:20px">{{ topThreeType_2 }}
-                        <span>·{{ topThreeYear_2 }}</span>
-                    </p>
-                    <el-button text bg @click="getLines(2)" type="primary" style="margin-top: 35px;">Get lines&nbsp;-></el-button>
-                </el-card>
-            </el-col>
-            <el-col :span="8" class="cardcol">
-                <el-card class="moviecard">
-                    <el-image :src="topThreeImage_3" style="width: 300px;height:300px;margin-top:20px"> 
-                        <template #placeholder>
-                        <div class="image-slot">Loading<span class="dot">...</span></div>
-                        </template>
-                    </el-image>
-                    <p style="font-size: 22px;font-weight: bolder;;height:50px">{{ topThreeMovies_3 }}</p>
-                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);height:20px">{{ topThreeType_3 }}
-                        <span>·{{ topThreeYear_3 }}</span>
-                    </p>
-                    <el-button text bg @click="getLines(3)" type="primary" style="margin-top: 35px;">Get lines&nbsp;-></el-button>
-                </el-card>
-            </el-col>
-        </el-row>
+            </el-row>
         
     </div>
 </template>
@@ -65,7 +35,7 @@
 .moviecard{
     width:400px;
     height:600px;
-    
+    margin-top:30px
 }
 </style>
 
@@ -77,39 +47,30 @@ import { onMounted,ref} from 'vue';
 
 const router = useRouter();
 
+
 const queryString=ref('')
-// const topThreeMovies=ref([])
-const topThreeMovies_1=ref('')
-const topThreeMovies_2=ref('')
-const topThreeMovies_3=ref('')
-const topThreeType_1=ref('')
-const topThreeType_2=ref('')
-const topThreeType_3=ref('')
-const topThreeYear_1=ref('')
-const topThreeYear_2=ref('')
-const topThreeYear_3=ref('')
-const topThreeImage_1=ref('')
-const topThreeImage_2=ref('')
-const topThreeImage_3=ref('')
-const topThreeId_1=ref('')
-const topThreeId_2=ref('')
-const topThreeId_3=ref('')
+const ThreeMovieArray=ref([])
+const ThreeTypeArray=ref([])
+const ThreeYearArray=ref([])
+const ThreeImageArray=ref([])
+const ThreeIdArray=ref([])
 
 
 const getLines = (index) => {
-  switch (index) {
-    case 1:
-      router.push({ path: '/thirdPageLines', query: { queryString: topThreeId_1.value }});
-      break;
-    case 2:
-      router.push({ path: '/thirdPageLines', query: { queryString: topThreeId_2.value }});
-      break;
-    case 3:
-      router.push({ path: '/thirdPageLines', query: { queryString: topThreeId_3.value }});
-      break;
-    default:
-      break;
-  }
+//   switch (index) {
+//     case 1:
+//       router.push({ path: '/thirdPageLines', query: { queryString: topThreeId_1.value }});
+//       break;
+//     case 2:
+//       router.push({ path: '/thirdPageLines', query: { queryString: topThreeId_2.value }});
+//       break;
+//     case 3:
+//       router.push({ path: '/thirdPageLines', query: { queryString: topThreeId_3.value }});
+//       break;
+//     default:
+//       break;
+//   }
+  router.push({ path: '/thirdPageLines', query: { queryString: ThreeIdArray.value[index-1] }});
 };
 
 const getResults=async()=>{
@@ -136,46 +97,27 @@ const getResults=async()=>{
     try {
         const response = await axios.request(options);
         console.log(response.data);
+        console.log(response.data.results.length);
+        const results = response.data.results.slice(0, 18);
 
-        const movie_title1=response.data.results[0].title
-        topThreeMovies_1.value=movie_title1
-        const movie_type1=response.data.results[0].titleType
-        topThreeType_1.value=movie_type1
-        const movie_image1=response.data.results[0].image.url
-        topThreeImage_1.value=movie_image1
-        const movie_year1=response.data.results[0].year
-        topThreeYear_1.value=movie_year1
-        const parts1 = response.data.results[0].id.split('/');
-        const extractedId1 = parts1.find(part => part.includes('tt'));
-        topThreeId_1.value=extractedId1
+      
+        for (let i = 0; i < results.length; i++) {
+            const movie_title = results[i].title;
+            ThreeMovieArray.value.push(movie_title);
 
-        const movie_title2=response.data.results[1].title
-        topThreeMovies_2.value=movie_title2
-        const movie_type2=response.data.results[1].titleType
-        topThreeType_2.value=movie_type2
-        const movie_image2=response.data.results[1].image.url
-        topThreeImage_2.value=movie_image2
-        const movie_year2=response.data.results[1].year
-        topThreeYear_2.value=movie_year2
-        const parts2 = response.data.results[1].id.split('/');
-        const extractedId2 = parts2.find(part => part.includes('tt'));
-        topThreeId_2.value=extractedId2
+            const movie_type = results[i].titleType;
+            ThreeTypeArray.value.push(movie_type);
 
-        const movie_title3=response.data.results[2].title
-        topThreeMovies_3.value=movie_title3
-        const movie_type3=response.data.results[2].titleType
-        topThreeType_3.value=movie_type3
-        const movie_image3=response.data.results[2].image.url
-        topThreeImage_3.value=movie_image3
-        const movie_year3=response.data.results[2].year
-        topThreeYear_3.value=movie_year3
-        const parts3 = response.data.results[2].id.split('/');
-        const extractedId3 = parts3.find(part => part.includes('tt'));
-        topThreeId_3.value=extractedId3
+            const movie_image = results[i].image.url;
+            ThreeImageArray.value.push(movie_image);
 
-        console.log( topThreeId_1.value) 
-        console.log( topThreeId_2.value)
-         console.log( topThreeId_3.value)
+            const movie_year = results[i].year;
+            ThreeYearArray.value.push(movie_year);
+
+            const parts = results[i].id.split('/');
+            const extractedId = parts.find(part => part.includes('tt'));
+            ThreeIdArray.value.push(extractedId);
+        }
 
        
     } catch (error) {

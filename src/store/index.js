@@ -2,7 +2,7 @@ import { createStore } from 'vuex';
 
 const store = createStore({
     state: {
-        choice: 'Lyrics',
+        choice: 'Music',
       },
       mutations: {
         setChoice(state, newChoice) {

@@ -14,7 +14,7 @@
             <el-button :icon=Check @click="searchLyrics" style="z-index=3;margin-top:20px" type="warning">Search</el-button>
         </div>
     </div>
-    <div style="height:650px;margin-top:15vh">
+    <div style="height:75vh;margin-top:12vh">
         <el-row>
             <el-col class="leftcol" :span="10">
                 <div class="introduction">
@@ -53,7 +53,7 @@
                             <div class="card-header">
                                 <div style="display: flex;justify-content: center;align-items: center;">
                                     <Headset style="width:20px;margin-right: 10px;color:rgba(92, 58, 156, 0.881)"/>
-                                    <span style="font-size: 22px;font-weight: bold;color:rgba(92, 58, 156, 0.881)">Music</span>
+                                    <span style="font-size: 26px;font-weight: bold;color:rgba(92, 58, 156, 0.881)">Music</span>
                                 </div>
                             </div>
                             </template>
@@ -78,7 +78,7 @@
                             <div class="card-header">
                                 <div style="display: flex;justify-content: center;align-items: center;">
                                     <Film style="width:20px;margin-right: 10px;color:rgba(92, 58, 156, 0.881)"/>
-                                    <span style="font-size: 22px;font-weight: bold;color: rgba(92, 58, 156, 0.881)">Media</span>
+                                    <span style="font-size: 26px;font-weight: bold;color: rgba(92, 58, 156, 0.881)">Media</span>
                                 </div>
                                 
                             </div>
@@ -117,7 +117,7 @@
                     Embark on a journey to explore the formidable power of AI, where you'll witness its unparalleled strength in action,
                      reshaping the boundaries of what's possible and unlocking new realms of innovation and discovery.
                 </p>
-                <el-button link style="font-size:20px;color:rgba(92, 58, 156, 0.881);font-weight: bold;margin-top:20px " @click="scrollToTop">Get Started!</el-button>
+                <el-button  style="font-size:19px;background-color:rgba(235, 171, 118, 0.881);font-weight: bold;margin-top:20px ;color:white;padding:25px" @click="scrollToTop">Get Started!</el-button>
             </div>
             
         </div>
@@ -196,7 +196,7 @@ function scrollToTop() {
 
 <style>
 .my-image{
-    height:85vh;
+    height:87vh;
     width:100vw;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .2);
     margin-top: 0px;

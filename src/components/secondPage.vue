@@ -5,43 +5,19 @@
             <p style="font-size: 48px;font-weight: bolder;color: rgb(15, 62, 144);">Music</p>
             <p style="margin-top:-20px;color: rgba(15, 62, 144, 0.706);">Get what you like of any given track right now</p>
         </div>
-        <el-row style="margin-bottom:40px;margin-top: 50px;">
-            <el-col :span="8" class="cardcol">
-                <el-card class="songcard">
-                    <el-image :src="topThreeImage_1" style="width: 300px;height:300px;margin-top:20px"> 
-                        <template #placeholder>
-                        <div class="image-slot">Loading<span class="dot">...</span></div>
-                        </template>
-                    </el-image>
-                    <p style="font-size: 22px;font-weight: bolder;height:70px">{{ topThreeSongs_1 }}</p>
-                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);height:50px">{{ topThreeSinger_1 }}</p>
-                    <el-button text bg @click="getLyrics(1)" type="primary" style="margin-top:0px">Get lyrics&nbsp;-></el-button>
-                </el-card>
-            </el-col>
-            <el-col :span="8" class="cardcol">
-                <el-card class="songcard">
-                    <el-image :src="topThreeImage_2" style="width: 300px;height:300px;margin-top: 20px;"> 
-                        <template #placeholder>
-                        <div class="image-slot">Loading<span class="dot">...</span></div>
-                        </template>
-                    </el-image>
-                    <p style="font-size: 22px;font-weight: bolder;height:70px">{{ topThreeSongs_2 }}</p>
-                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);height:50px">{{ topThreeSinger_2 }}</p>
-                    <el-button text bg @click="getLyrics(2)" type="primary" style="margin-top:0px">Get lyrics&nbsp;-></el-button>
-                </el-card>
-            </el-col>
-            <el-col :span="8" class="cardcol">
-                <el-card class="songcard">
-                    <el-image :src="topThreeImage_3" style="width: 300px;height:300px;margin-top: 20px;"> 
-                        <template #placeholder>
-                        <div class="image-slot">Loading<span class="dot">...</span></div>
-                        </template>
-                    </el-image>
-                    <p style="font-size: 22px;font-weight: bolder;height:70px">{{ topThreeSongs_3 }}</p>
-                    <p style="font-size: 15px;font-weight: 300;color: rgb(103, 103, 103);height:50px">{{ topThreeSinger_3 }}</p>
-                    <el-button text bg @click="getLyrics(3)" type="primary" style="margin-top:0px">Get lyrics&nbsp;-></el-button>
-                </el-card>
-            </el-col>
+        <el-row style="margin-bottom: 40px; margin-top: 50px;">
+        <el-col v-for="(song, index) in topThreeSongsArray" :key="index" :span="8" class="cardcol">
+            <el-card class="songcard">
+            <el-image :src="topThreeImageArray[index]" style="width: 300px; height: 300px; margin-top: 20px">
+                <template #placeholder>
+                <div class="image-slot">Loading<span class="dot">...</span></div>
+                </template>
+            </el-image>
+            <p style="font-size: 22px; font-weight: bolder; height: 70px">{{ song }}</p>
+            <p style="font-size: 15px; font-weight: 300; color: rgb(103, 103, 103); height: 50px">{{ topThreeSingerArray[index] }}</p>
+            <el-button text bg @click="getLyrics(index + 1)" type="primary" style="margin-top: 0px">Get lyrics&nbsp;-></el-button>
+            </el-card>
+        </el-col>
         </el-row>
         
     </div>
@@ -60,6 +36,7 @@
 .songcard{
     width:400px;
     height:600px;
+    margin-top:30px
     
 }
 </style>
@@ -73,35 +50,29 @@ import { onMounted,ref} from 'vue';
 const router = useRouter();
 
 const queryString=ref('')
-// const topThreeSongs=ref([])
-const topThreeSongs_1=ref('')
-const topThreeSongs_2=ref('')
-const topThreeSongs_3=ref('')
-const topThreeSinger_1=ref('')
-const topThreeSinger_2=ref('')
-const topThreeSinger_3=ref('')
-const topThreeImage_1=ref('')
-const topThreeImage_2=ref('')
-const topThreeImage_3=ref('')
-const topThreeId_1=ref('')
-const topThreeId_2=ref('')
-const topThreeId_3=ref('')
+
+
+const topThreeSongsArray=ref([])
+const topThreeSingerArray=ref([])
+const topThreeImageArray=ref([])
+const topThreeIdArray=ref([])
 
 
 const getLyrics = (index) => {
-  switch (index) {
-    case 1:
-      router.push({ path: '/thirdPage', query: { queryString: topThreeId_1.value }});
-      break;
-    case 2:
-      router.push({ path: '/thirdPage', query: { queryString: topThreeId_2.value }});
-      break;
-    case 3:
-      router.push({ path: '/thirdPage', query: { queryString: topThreeId_3.value }});
-      break;
-    default:
-      break;
-  }
+//   switch (index) {
+//     case 1:
+//       router.push({ path: '/thirdPage', query: { queryString: topThreeIdArray.value[0] }});
+//       break;
+//     case 2:
+//       router.push({ path: '/thirdPage', query: { queryString: topThreeIdArray.value[1] }});
+//       break;
+//     case 3:
+//       router.push({ path: '/thirdPage', query: { queryString: topThreeIdArray.value[2] }});
+//       break;
+//     default:
+//       break;
+//   }
+  router.push({ path: '/thirdPage', query: { queryString: topThreeIdArray.value[index-1] }});
 };
 
 const getResults=async()=>{
@@ -125,7 +96,7 @@ const getResults=async()=>{
     try {
         const response = await axios.request(options);
         console.log(response.data);
-        const topThreeSongs2 = response.data.hits.slice(0, 3).map(item => {
+        const topThreeSongs2 = response.data.hits.slice(0,9).map(item => {
         return {
             title: item.result.title,
             artist: item.result.primary_artist.name,
@@ -134,28 +105,21 @@ const getResults=async()=>{
         };
         });
         console.log(topThreeSongs2)
-        // topThreeSongs.value=JSON.parse(JSON.stringify(topThreeSongs2))
-        topThreeSongs_1.value=topThreeSongs2[0].title
-        topThreeSongs_2.value=topThreeSongs2[1].title
-        topThreeSongs_3.value=topThreeSongs2[2].title
-        topThreeSinger_1.value=topThreeSongs2[0].artist
-        topThreeSinger_2.value=topThreeSongs2[1].artist
-        topThreeSinger_3.value=topThreeSongs2[2].artist
-        topThreeImage_1.value=topThreeSongs2[0].albumImage
-        topThreeImage_2.value=topThreeSongs2[1].albumImage
-        topThreeImage_3.value=topThreeSongs2[2].albumImage
-        topThreeId_1.value=topThreeSongs2[0].id
-        topThreeId_2.value=topThreeSongs2[1].id
-        topThreeId_3.value=topThreeSongs2[2].id
-        console.log(topThreeSongs_1.value)
-        console.log(topThreeSongs_2.value)
-        console.log(topThreeSongs_3.value)
-        console.log(topThreeSinger_1.value)
-        console.log(topThreeSinger_2.value)
-        console.log(topThreeSinger_3.value)
-        console.log(topThreeImage_1.value)
-        console.log(topThreeImage_2.value)
-        console.log(topThreeImage_3.value)
+        console.log(topThreeSongs2.length)
+
+        for(let i=0;i<topThreeSongs2.length;i++){
+            topThreeSongsArray.value.push(topThreeSongs2[i].title)
+            topThreeSingerArray.value.push(topThreeSongs2[i].artist)
+            topThreeImageArray.value.push(topThreeSongs2[i].albumImage)
+            topThreeIdArray.value.push(topThreeSongs2[i].id)
+        }
+
+        for(let i=0;i<topThreeSongs2.length;i++){
+            console.log(topThreeSongsArray.value[i])
+            console.log(topThreeSingerArray.value[i])
+            console.log(topThreeImageArray.value[i])
+            console.log(topThreeIdArray.value[i])
+        }
        
     } catch (error) {
         console.error(error);

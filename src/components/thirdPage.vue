@@ -303,7 +303,7 @@ onMounted(() => {
 }
 
 
-.headerimagesong{
+.headerimagesong:hover{
     transform: scale(1.02); 
 }
 
